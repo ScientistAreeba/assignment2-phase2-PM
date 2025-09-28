@@ -14,7 +14,7 @@ Any changes you make to your deployed app will be automatically pushed to this r
 
 Your project is live at:
 
-**[https://vercel.com/malaika-fayyazs-projects/v0-standards-comparison-app](https://vercel.com/malaika-fayyazs-projects/v0-standards-comparison-app)**
+**[View App](https://pm-assignment01.vercel.app/)**
 
 ## Build your app
 
