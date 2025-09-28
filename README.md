@@ -18,12 +18,6 @@ The app provides a **Google-like interface** where users can search for topics (
 
 This project was built as part of a **Project Management assignment**, focusing on applying PM standards in a digital solution. The emphasis is on **clarity, usability, and process design** rather than complex coding.
 
-## Tech Stack
-
-* **Frontend:** V0 + TypeScript
-* **Backend:** PDF documents processed and served as searchable content
-* **UI:** Minimalist (Google-style) interface
-
 ## Authors
 
 Built by [MBA | MalaikaFayyaz-Bareera Hanif Butt-Areeba Atif] for Project Management Course [Assignment01].
