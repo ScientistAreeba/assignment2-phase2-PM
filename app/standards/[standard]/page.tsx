@@ -14,19 +14,19 @@ const standardsInfo = {
     title: "PMBOK Guide - 7th Edition",
     description: "A Guide to the Project Management Body of Knowledge",
     color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-    pdfUrl: "/pdfs/pmbok-guide-7th-edition.pdf", // Placeholder URL
+    pdfUrl: "https://trainupinstitute.com/wp-content/uploads/2022/03/Project-Management-Institute-A-Guide-to-the-Project-Management-Body-of-Knowledge-PMBOK%C2%AE-Guide%E2%80%93Sixth-Edition-Project-Management-Institute-2017.pdf", // Placeholder URL
   },
   prince2: {
     title: "PRINCE2 Methodology",
     description: "Managing Successful Projects with PRINCE2",
     color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    pdfUrl: "/pdfs/prince2-methodology.pdf", // Placeholder URL
+    pdfUrl: "https://www.itu.int/en/testweb/v6master/training/Documents/PRINCE2.pdf", // Placeholder URL
   },
   iso: {
     title: "ISO 21500/21502",
     description: "Project, Programme and Portfolio Management Standards",
     color: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
-    pdfUrl: "/pdfs/iso-21500-21502.pdf", // Placeholder URL
+    pdfUrl: "https://www.nqa.com/getmedia/ae12c945-4dbb-4b73-a4e3-996261a540af/NQA-ISO-27001-Implementation-Guide.pdf", // Placeholder URL
   },
 }
 
