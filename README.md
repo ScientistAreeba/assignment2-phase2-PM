@@ -26,6 +26,6 @@ This project was built as part of a **Project Management assignment**, focusing 
 
 ## Authors
 
-Built by [MBA / MalaikaFayyaz-Bareera Hanif Butt-Areeba Atif] for [Project Management Course-Assignment01].
+Built by [MBA | MalaikaFayyaz-Bareera Hanif Butt-Areeba Atif] for Project Management Course [Assignment01].
 
 
