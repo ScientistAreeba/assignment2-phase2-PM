@@ -48,8 +48,23 @@ export default function StandardPage() {
     if (!standardInfo) return
     // Prefer the local file directly. HEAD probes can fail in the preview environment.
     const local = standardInfo.localPdfUrl
-    setPdfSrc(local)
-    console.log("[v0] Standard:", standard, "pdfSrc set to:", local)
+    const checkLocal = async () => {
+      try {
+        console.log("[v0] Probing local PDF:", local)
+        const res = await fetch(local, { method: "HEAD" })
+        if (res.ok) {
+          setPdfSrc(local)
+          console.log("[v0] Local PDF available:", local)
+        } else {
+          setPdfSrc(null)
+          console.log("[v0] Local PDF missing (status):", res.status)
+        }
+      } catch (err) {
+        setPdfSrc(null)
+        console.log("[v0] Local PDF probe failed:", (err as any)?.message || err)
+      }
+    }
+    void checkLocal()
   }, [standardInfo, standard])
 
   const handleSearch = (e: React.FormEvent) => {
@@ -119,32 +134,59 @@ export default function StandardPage() {
                 <PdfViewer fileUrl={pdfSrc} />
               </div>
             ) : (
-              <div className="aspect-[8.5/11] bg-white flex items-center justify-center text-muted-foreground">
-                Loading PDF...
+              <div className="flex h-[calc(100vh-220px)] items-center justify-center p-6 text-center">
+                <div className="max-w-md space-y-3">
+                  <p className="text-sm text-muted-foreground">
+                    Inline viewing isn&apos;t available for this standard because the local PDF was not found or the
+                    source blocks embedding. You can still open or download the official document.
+                  </p>
+                  <div className="flex items-center justify-center gap-2">
+                    <Button asChild variant="outline" size="sm">
+                      <a href={standardInfo.externalPdfUrl} target="_blank" rel="noopener noreferrer">
+                        Open official PDF
+                      </a>
+                    </Button>
+                    <Button asChild size="sm">
+                      <a href={standardInfo.externalPdfUrl} target="_blank" rel="noopener noreferrer">
+                        Download
+                      </a>
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    To enable inline viewing, add the PDF to <code className="font-mono">public/pdfs/</code> as{" "}
+                    <code className="font-mono">
+                      {standard === "pmbok" ? "pmbok.pdf" : standard === "prince2" ? "prince2.pdf" : "iso.pdf"}
+                    </code>
+                    .
+                  </p>
+                </div>
               </div>
             )}
           </div>
 
-          {pdfSrc && (
-            <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
-              <div className="truncate">
-                Source: <span className="font-mono">{pdfSrc}</span>
+          {(() => {
+            const openLink = pdfSrc ?? standardInfo.externalPdfUrl
+            return (
+              <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
+                <div className="truncate">
+                  Source: <span className="font-mono">{openLink}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button asChild variant="outline" size="sm">
+                    <a href={openLink} target="_blank" rel="noopener noreferrer">
+                      Open in new tab
+                    </a>
+                  </Button>
+                  <Button asChild size="sm">
+                    <a href={openLink} download>
+                      <Download className="h-4 w-4 mr-2" />
+                      Download
+                    </a>
+                  </Button>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Button asChild variant="outline" size="sm">
-                  <a href={pdfSrc} target="_blank" rel="noopener noreferrer">
-                    Open in new tab
-                  </a>
-                </Button>
-                <Button asChild size="sm">
-                  <a href={pdfSrc ?? "#"} download>
-                    <Download className="h-4 w-4 mr-2" />
-                    Download
-                  </a>
-                </Button>
-              </div>
-            </div>
-          )}
+            )
+          })()}
         </div>
       </div>
     </div>
