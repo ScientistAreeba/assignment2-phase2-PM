@@ -48,23 +48,27 @@ export default function AnalysisPage() {
   const loadDefaultAnalysis = () => {
     setIsLoading(true)
     try {
-      const commonTopics = ["risk management", "stakeholder management", "quality management"]
-      let allResults: any[] = []
+      if (analysisType === "unique") {
+        const uniqueResults = comparisonEngine.getGlobalUniquePoints(3)
+        setResults(uniqueResults)
+      } else {
+        const commonTopics = ["risk management", "stakeholder management", "quality management"]
+        let allResults: any[] = []
 
-      commonTopics.forEach((topic) => {
-        const topicResults = comparisonEngine.filterByAnalysisType(
-          topic,
-          analysisType as "similarities" | "differences" | "unique",
-        )
-        allResults = [...allResults, ...topicResults]
-      })
+        commonTopics.forEach((topic) => {
+          const topicResults = comparisonEngine.filterByAnalysisType(
+            topic,
+            analysisType as "similarities" | "differences",
+          )
+          allResults = [...allResults, ...topicResults]
+        })
 
-      // Remove duplicates and limit results
-      const uniqueResults = allResults
-        .filter((result, index, self) => index === self.findIndex((r) => r.id === result.id))
-        .slice(0, 10)
+        const uniqueResults = allResults
+          .filter((result, index, self) => index === self.findIndex((r) => r.id === result.id))
+          .slice(0, 10)
 
-      setResults(uniqueResults)
+        setResults(uniqueResults)
+      }
     } catch (error) {
       console.error("Error loading default analysis:", error)
       setResults([])
@@ -148,23 +152,25 @@ export default function AnalysisPage() {
 
       <div className="max-w-6xl mx-auto px-6 py-6">
         {/* Search Bar */}
-        <div className="mb-8">
-          <form onSubmit={handleSearch} className="max-w-2xl">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                type="text"
-                placeholder={`Search for ${analysisType} on a specific topic...`}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-3 rounded-full border focus:ring-2 focus:ring-primary"
-              />
-            </div>
-          </form>
-          <p className="text-sm text-muted-foreground mt-2">
-            Enter a topic like "Risk Management" or "Stakeholder Engagement" to see {analysisType} across standards
-          </p>
-        </div>
+        {analysisType !== "unique" && (
+          <div className="mb-8">
+            <form onSubmit={handleSearch} className="max-w-2xl">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input
+                  type="text"
+                  placeholder={`Search for ${analysisType} on a specific topic...`}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 pr-4 py-3 rounded-full border focus:ring-2 focus:ring-primary"
+                />
+              </div>
+            </form>
+            <p className="text-sm text-muted-foreground mt-2">
+              Enter a topic like "Risk Management" or "Stakeholder Engagement" to see {analysisType} across standards
+            </p>
+          </div>
+        )}
 
         {/* Analysis Results */}
         <div className="space-y-6">
@@ -176,7 +182,7 @@ export default function AnalysisPage() {
               ) : (
                 <>
                   Showing {results.length} {analysisType} across PM standards
-                  {searchQuery && ` for "${searchQuery}"`}
+                  {analysisType !== "unique" && searchQuery && ` for "${searchQuery}"`}
                 </>
               )}
             </span>

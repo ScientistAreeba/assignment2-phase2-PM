@@ -168,6 +168,55 @@ export class ComparisonEngine {
     }
   }
 
+  // Return top unique points per standard without needing a query
+  getGlobalUniquePoints(limitPerStandard = 3): StandardContent[] {
+    const byStandard: Record<StandardContent["standard"], StandardContent[]> = {
+      PMBOK: [],
+      PRINCE2: [],
+      ISO: [],
+    }
+
+    // Group all content by standard
+    this.database.forEach((item) => {
+      byStandard[item.standard].push(item)
+    })
+
+    const pickTopUnique = (items: StandardContent[]): StandardContent[] => {
+      // Score each item by 1 - max overlap with any other standard in the same category
+      const scored = items.map((item) => {
+        const othersSameCategory = this.database.filter(
+          (o) => o.standard !== item.standard && o.category === item.category,
+        )
+        const maxOverlap =
+          othersSameCategory.length === 0
+            ? 0
+            : Math.max(...othersSameCategory.map((o) => this.keywordOverlapRatio(item.keywords, o.keywords)))
+        const uniqueScore = 1 - maxOverlap
+        return { item, uniqueScore }
+      })
+
+      // Sort by uniqueScore desc, then pick top N
+      return scored
+        .sort((a, b) => b.uniqueScore - a.uniqueScore)
+        .slice(0, limitPerStandard)
+        .map((s) => s.item)
+    }
+
+    const out = [
+      ...pickTopUnique(byStandard.PMBOK),
+      ...pickTopUnique(byStandard.PRINCE2),
+      ...pickTopUnique(byStandard.ISO),
+    ]
+
+    // De-dupe by id just in case
+    const seen = new Set<string>()
+    return out.filter((x) => {
+      if (seen.has(x.id)) return false
+      seen.add(x.id)
+      return true
+    })
+  }
+
   private calculateRelevance(content: StandardContent, searchTerms: string[]): number {
     let score = 0
     const contentText = `${content.title} ${content.content}`.toLowerCase()
@@ -288,6 +337,15 @@ export class ComparisonEngine {
 
     // If less than 50% overlap in keywords, consider it a significant difference
     return intersection.size / union.size < 0.5
+  }
+
+  // Global unique helper: compute overlap between keyword sets
+  private keywordOverlapRatio(keywords1: string[], keywords2: string[]): number {
+    const s1 = new Set(keywords1)
+    const s2 = new Set(keywords2)
+    const intersection = new Set([...s1].filter((k) => s2.has(k))).size
+    const union = new Set([...s1, ...s2]).size || 1
+    return intersection / union
   }
 }
 

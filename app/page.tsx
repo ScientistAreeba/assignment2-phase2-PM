@@ -24,6 +24,10 @@ export default function HomePage() {
   }
 
   const handleAnalysisClick = (type: "similarities" | "differences" | "unique") => {
+    if (type === "unique") {
+      router.push(`/analysis/unique`)
+      return
+    }
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}&analysis=${type}`)
     } else {

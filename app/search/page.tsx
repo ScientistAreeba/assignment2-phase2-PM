@@ -23,10 +23,11 @@ function SearchContent() {
     const query = searchParams.get("q") || ""
     const analysis = searchParams.get("analysis")
     setSearchQuery(query)
-    setActiveAnalysis(analysis)
+    const normalized = analysis === "unique" ? null : analysis
+    setActiveAnalysis(normalized)
 
     if (query) {
-      performSearch(query, analysis)
+      performSearch(query, normalized)
     }
   }, [searchParams])
 
@@ -142,13 +143,6 @@ function SearchContent() {
               onClick={() => handleAnalysisFilter("differences")}
             >
               Differences
-            </Button>
-            <Button
-              variant={activeAnalysis === "unique" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleAnalysisFilter("unique")}
-            >
-              Unique Points
             </Button>
           </div>
         </div>
