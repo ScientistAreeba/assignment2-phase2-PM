@@ -13,7 +13,7 @@ const standardsInfo = {
     title: "PMBOK Guide - 7th Edition",
     description: "A Guide to the Project Management Body of Knowledge",
     color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-    localPdfUrl: "https://trainupinstitute.com/wp-content/uploads/2022/03/Project-Management-Institute-A-Guide-to-the-Project-Management-Body-of-Knowledge-PMBOK%C2%AE-Guide%E2%80%93Sixth-Edition-Project-Management-Institute-2017.pdf",
+    localPdfUrl: "/pdfs/pmbok.pdf",
     externalPdfUrl:
       "https://trainupinstitute.com/wp-content/uploads/2022/03/Project-Management-Institute-A-Guide-to-the-Project-Management-Body-of-Knowledge-PMBOK%C2%AE-Guide%E2%80%93Sixth-Edition-Project-Management-Institute-2017.pdf",
   },
