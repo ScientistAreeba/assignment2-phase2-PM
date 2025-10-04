@@ -7,6 +7,7 @@ import { ArrowLeft, Download, Search, BookOpen, Maximize2, Minimize2 } from "luc
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { PdfViewer } from "@/components/pdf-viewer"
 
 const standardsInfo = {
   pmbok: {
@@ -40,39 +41,16 @@ export default function StandardPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [pdfSrc, setPdfSrc] = useState<string | null>(null)
-  const [checked, setChecked] = useState(false)
   const standard = params.standard as string
   const standardInfo = standardsInfo[standard as keyof typeof standardsInfo]
 
   useEffect(() => {
-    const pickSource = async () => {
-      if (!standardInfo) return
-      try {
-        const res = await fetch(standardInfo.localPdfUrl, { method: "HEAD" })
-        if (res.ok) {
-          setPdfSrc(standardInfo.localPdfUrl)
-        } else {
-          setPdfSrc(standardInfo.externalPdfUrl)
-        }
-      } catch {
-        setPdfSrc(standardInfo.externalPdfUrl)
-      } finally {
-        setChecked(true)
-      }
-    }
-    pickSource()
-  }, [standardInfo])
-
-  if (!standardInfo) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold mb-4">Standard Not Found</h1>
-          <Button onClick={() => router.push("/")}>Return Home</Button>
-        </div>
-      </div>
-    )
-  }
+    if (!standardInfo) return
+    // Prefer the local file directly. HEAD probes can fail in the preview environment.
+    const local = standardInfo.localPdfUrl
+    setPdfSrc(local)
+    console.log("[v0] Standard:", standard, "pdfSrc set to:", local)
+  }, [standardInfo, standard])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -136,23 +114,10 @@ export default function StandardPage() {
       <div className="flex-1 bg-muted/30">
         <div className="max-w-7xl mx-auto p-6">
           <div className="bg-card rounded-lg shadow-sm border overflow-hidden">
-            {checked ? (
-              pdfSrc ? (
-                <div className="h-[calc(100vh-220px)]">
-                  <iframe title={`${standardInfo.title} PDF`} src={pdfSrc} className="w-full h-full" />
-                </div>
-              ) : (
-                <div className="aspect-[8.5/11] bg-white flex items-center justify-center text-muted-foreground">
-                  <div className="text-center p-6">
-                    <BookOpen className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                    <h3 className="text-xl font-semibold mb-2">Unable to load PDF</h3>
-                    <p className="text-sm max-w-md mx-auto">
-                      We couldn&apos;t determine a valid PDF source. Please ensure the file exists at{" "}
-                      <code className="font-mono">/public/pdfs/</code>.
-                    </p>
-                  </div>
-                </div>
-              )
+            {pdfSrc ? (
+              <div className="h-[calc(100vh-220px)] overflow-auto">
+                <PdfViewer fileUrl={pdfSrc} />
+              </div>
             ) : (
               <div className="aspect-[8.5/11] bg-white flex items-center justify-center text-muted-foreground">
                 Loading PDF...
@@ -172,7 +137,7 @@ export default function StandardPage() {
                   </a>
                 </Button>
                 <Button asChild size="sm">
-                  <a href={pdfSrc} download>
+                  <a href={pdfSrc ?? "#"} download>
                     <Download className="h-4 w-4 mr-2" />
                     Download
                   </a>
