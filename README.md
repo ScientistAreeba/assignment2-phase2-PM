@@ -1,25 +1,30 @@
-# PRISMO
+# Standards comparison app
 
-A minimal web application for comparing and exploring project management standards — **PMBOK 7th Edition**, **PRINCE2**, and **ISO 21500/21502**.
-The app provides a **Google-like interface** where users can search for topics (e.g., *Risk Management*) and view relevant sections across the three standards. Results can be filtered to show **Similarities**, **Differences**, or **Unique Points**.
+*Automatically synced with your [v0.app](https://v0.app) deployments*
 
-## Live Demo
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/malaika-fayyazs-projects/v0-standards-comparison-app)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/VJZuJM59ztD)
 
-[Click here to open the deployed app](https://pm-assignment01.vercel.app/)
+## Overview
 
-## Features
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
 
-* Search across PMBOK, PRINCE2, and ISO standards.
-* View results in a clean, familiar search interface.
-* Toggle between **Similarities**, **Differences**, and **Unique Points**.
-* Direct access to full standard documents via quick-links.
+## Deployment
 
-## Purpose
+Your project is live at:
 
-This project was built as part of a **Project Management assignment**, focusing on applying PM standards in a digital solution. The emphasis is on **clarity, usability, and process design** rather than complex coding.
+**[View App](https://pm-assignment01.vercel.app/)**
 
-## Authors
+## Build your app
 
-Built by [MBA | MalaikaFayyaz-Bareera Hanif Butt-Areeba Atif] for Project Management Course [Assignment01].
+Continue building your app on:
 
+**[https://v0.app/chat/projects/VJZuJM59ztD](https://v0.app/chat/projects/VJZuJM59ztD)**
 
+## How It Works
+
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
