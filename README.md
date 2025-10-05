@@ -5,7 +5,7 @@ The app provides a **Google-like interface** where users can search for topics (
 
 ## 🚀 Live Demo
 
-[View App](https://pm-assignment01.vercel.app/)
+![View App](https://pm-assignment01.vercel.app/)
 
 ## ✨ Features
 
@@ -14,13 +14,13 @@ The app provides a **Google-like interface** where users can search for topics (
 * Toggle between **Similarities**, **Differences**, and **Unique Points**.
 * Direct access to full standard documents via quick-links.
 
-## 📌 Purpose
+## Purpose
 
 This project was built as part of a **Project Management assignment**, focusing on applying PM standards in a digital solution. The emphasis is on **clarity, usability, and process design** rather than complex coding.
 
 ## WBS
 [wbs_image](wbs.png)
 
-## 👥 Authors
+## Authors
 
-Built by [Your Team Name / Group Members] for [Course / Assignment].
+Built by [MAB / Malaika Fayyaz - Areeba Atif - Bareera Hanif Butt] for Project Management Course.
