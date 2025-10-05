@@ -5,7 +5,7 @@ The app provides a **Google-like interface** where users can search for topics (
 
 ## 🚀 Live Demo
 
-![View App](https://pm-assignment01.vercel.app/)
+[View App](https://pm-assignment01.vercel.app/)
 
 ## ✨ Features
 
@@ -19,7 +19,7 @@ The app provides a **Google-like interface** where users can search for topics (
 This project was built as part of a **Project Management assignment**, focusing on applying PM standards in a digital solution. The emphasis is on **clarity, usability, and process design** rather than complex coding.
 
 ## WBS
-[wbs_image](wbs.png)
+![wbs_image](wbs.png)
 
 ## Authors
 
