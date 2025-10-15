@@ -1,8 +1,23 @@
 import { z } from "zod"
 
+function canonicalStandard(input: unknown) {
+  const s = String(input ?? "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim()
+  if (s.includes("pmbok")) return "PMBOK 7" as const
+  if (s.includes("prince2")) return "PRINCE2" as const
+  if (s.includes("iso 21500") || s.includes("iso 21502") || s.includes("iso21500") || s.includes("iso21502"))
+    return "ISO 21500/21502" as const
+  // default: try to preserve exact known value if provided
+  if (input === "ISO 21500/21502" || input === "PMBOK 7" || input === "PRINCE2") return input as any
+  throw new Error("Unknown standard")
+}
+
 export const evidenceSchema = z.object({
-  standard: z.enum(["PMBOK 7", "PRINCE2", "ISO 21500/21502"]),
-  section: z.string(), // e.g., "4.3 Tailoring considerations"
+  // was: z.enum(["PMBOK 7", "PRINCE2", "ISO 21500/21502"])
+  standard: z.preprocess(canonicalStandard, z.enum(["PMBOK 7", "PRINCE2", "ISO 21500/21502"])),
+  section: z.string(),
   note: z.string().optional(),
 })
 

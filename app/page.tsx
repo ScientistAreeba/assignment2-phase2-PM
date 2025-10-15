@@ -7,7 +7,7 @@ export default function Home() {
       <h1 className="text-balance text-4xl font-semibold tracking-tight">PRISMO</h1>
       <p className="text-muted-foreground">Project Management Standards Intelligence & Comparison</p>
       <Link href="/phase-two">
-        <Button>Open Phase 2: Process Proposal</Button>
+        <Button>Process Proposal</Button>
       </Link>
     </main>
   )

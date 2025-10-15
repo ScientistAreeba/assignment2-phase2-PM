@@ -55,26 +55,30 @@ Constraints:
       prompt: user,
     })
 
-    // Attempt to parse JSON even if extra text is included
+    console.log("[v0] /api/process raw length:", text?.length ?? 0)
+
     const jsonString = extractJson(text)
     const parsed = JSON.parse(jsonString)
     const plan: ProcessPlan = processPlanSchema.parse(parsed)
 
     return NextResponse.json(plan)
   } catch (err: any) {
-    // console.log("[v0] Error in /api/process:", err?.message)
+    console.log("[v0] Error in /api/process:", err?.message)
     return new NextResponse(err?.message || "Invalid request", { status: 400 })
   }
 }
 
 function extractJson(s: string): string {
+  // prefer fenced \`\`\`json blocks when present
+  const fenced = s.match(/```json([\s\S]*?)```/i)
+  if (fenced?.[1]) return fenced[1].trim()
+  // fallback: last closing brace
   const match = s.match(/\{[\s\S]*\}$/)
   if (match) return match[0]
-  // Fallback: find first { and last }
   const first = s.indexOf("{")
   const last = s.lastIndexOf("}")
   if (first !== -1 && last !== -1 && last > first) {
     return s.slice(first, last + 1)
   }
-  return s // will throw JSON.parse and surface error
+  return s
 }
