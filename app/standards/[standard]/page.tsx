@@ -46,25 +46,35 @@ export default function StandardPage() {
 
   useEffect(() => {
     if (!standardInfo) return
-    // Prefer the local file directly. HEAD probes can fail in the preview environment.
-    const local = standardInfo.localPdfUrl
-    const checkLocal = async () => {
-      try {
-        console.log("[v0] Probing local PDF:", local)
-        const res = await fetch(local, { method: "HEAD" })
-        if (res.ok) {
-          setPdfSrc(local)
-          console.log("[v0] Local PDF available:", local)
-        } else {
-          setPdfSrc(null)
-          console.log("[v0] Local PDF missing (status):", res.status)
+    
+    // For deployment, we'll use external URLs directly since local PDFs may not be accessible
+    // due to CORS restrictions or deployment issues
+    const isProduction = process.env.NODE_ENV === 'production'
+    
+    if (isProduction) {
+      // In production, use external URLs directly
+      setPdfSrc(standardInfo.externalPdfUrl)
+    } else {
+      // In development, try local first, then fallback to external
+      const local = standardInfo.localPdfUrl
+      const checkLocal = async () => {
+        try {
+          console.log("[PRISMO] Checking local PDF:", local)
+          const res = await fetch(local, { method: "HEAD" })
+          if (res.ok) {
+            setPdfSrc(local)
+            console.log("[PRISMO] Local PDF available:", local)
+          } else {
+            console.log("[PRISMO] Local PDF not found, using external:", res.status)
+            setPdfSrc(standardInfo.externalPdfUrl)
+          }
+        } catch (err) {
+          console.log("[PRISMO] Local PDF check failed, using external:", (err as any)?.message || err)
+          setPdfSrc(standardInfo.externalPdfUrl)
         }
-      } catch (err) {
-        setPdfSrc(null)
-        console.log("[v0] Local PDF probe failed:", (err as any)?.message || err)
       }
+      void checkLocal()
     }
-    void checkLocal()
   }, [standardInfo, standard])
 
   const handleSearch = (e: React.FormEvent) => {
@@ -135,29 +145,28 @@ export default function StandardPage() {
               </div>
             ) : (
               <div className="flex h-[calc(100vh-220px)] items-center justify-center p-6 text-center">
-                <div className="max-w-md space-y-3">
+                <div className="max-w-lg space-y-4">
+                  <div className="text-6xl mb-4">📄</div>
+                  <h3 className="text-lg font-semibold">PDF Viewer Ready</h3>
                   <p className="text-sm text-muted-foreground">
-                    Inline viewing isn&apos;t available for this standard because the local PDF was not found or the
-                    source blocks embedding. You can still open or download the official document.
+                    The PDF will load automatically. If you encounter issues, you can always open the document 
+                    in a new tab or download it directly.
                   </p>
                   <div className="flex items-center justify-center gap-2">
                     <Button asChild variant="outline" size="sm">
                       <a href={standardInfo.externalPdfUrl} target="_blank" rel="noopener noreferrer">
-                        Open official PDF
+                        Open in new tab
                       </a>
                     </Button>
                     <Button asChild size="sm">
-                      <a href={standardInfo.externalPdfUrl} target="_blank" rel="noopener noreferrer">
+                      <a href={standardInfo.externalPdfUrl} download>
+                        <Download className="h-4 w-4 mr-2" />
                         Download
                       </a>
                     </Button>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    To enable inline viewing, add the PDF to <code className="font-mono">public/pdfs/</code> as{" "}
-                    <code className="font-mono">
-                      {standard === "pmbok" ? "pmbok.pdf" : standard === "prince2" ? "prince2.pdf" : "iso.pdf"}
-                    </code>
-                    .
+                    Using external PDF source for better compatibility with deployment environments.
                   </p>
                 </div>
               </div>

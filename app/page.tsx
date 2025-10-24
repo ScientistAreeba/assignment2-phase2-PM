@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Search, FileText, BookOpen, Shield } from "lucide-react"
+import { Search, FileText, BookOpen, Shield, GitBranch } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -35,11 +35,24 @@ export default function HomePage() {
     }
   }
 
+  const handlePhase2Click = () => {
+    router.push("/processes")
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header with analysis buttons */}
       <header className="flex justify-end p-6">
         <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handlePhase2Click}
+            className="flex items-center gap-2 text-sm font-medium hover:bg-accent"
+          >
+            <GitBranch className="h-4 w-4" />
+            Phase 2: Processes
+          </Button>
           <Button
             variant="ghost"
             size="sm"
