@@ -40,7 +40,6 @@ Manage by iterations and continued business justification in innovative product 
 Provided universal terminology and high-level process framework.
 Strengthened standardization of deliverables within scenarios.
 
->>>>>>> f035705eb0143dffe43c8c53bdc84cab93e05fd5
 
 ## Authors
 
