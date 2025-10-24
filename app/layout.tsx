@@ -7,8 +7,8 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "PRISMO - Project Management Standards Comparison",
-  description: "Compare PMBOK, PRINCE2, and ISO standards with intelligent search and analysis",
+  title: "v0 App",
+  description: "Created with v0",
   generator: "v0.app",
 }
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={null}>{children}</Suspense>
+        <Suspense fallback={<div className="p-4 text-sm text-muted-foreground">Loading...</div>}>{children}</Suspense>
         <Analytics />
       </body>
     </html>

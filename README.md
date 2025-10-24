@@ -1,46 +1,30 @@
+# Website access
 
-# Process Proposal and Tailoring Using PMBOK 7, PRINCE2, and ISO 
+*Automatically synced with your [v0.app](https://v0.app) deployments*
 
-## Features of phase 2:
-Each process is designed by consolidating best practices from PMBOK , PRINCE2, and ISO.
-Search across PMBOK, PRINCE2, and ISO standards.
-View results in a clean, familiar search interface.
-Toggle between **Similarities**, **Differences**, and **Unique Points**.
-Direct access to full standard documents via quick-links
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/areebaaatif6-gmailcoms-projects/v0-website-access)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/DbrSuFCP7bD)
 
-The processes are:
-1. Context-specific as per needs.
-2. Evidence-based examples.
-3. Tailored with use cases.
+## Overview
+
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
 
 ## Deployment
 
-The project is live at:
+Your project is live at:
 
-**https://v0-website-access-jd.vercel.app/**
+**[https://vercel.com/areebaaatif6-gmailcoms-projects/v0-website-access](https://vercel.com/areebaaatif6-gmailcoms-projects/v0-website-access)**
 
-## WBS
+## Build your app
 
-<img width="1855" height="385" alt="wbs" src="https://github.com/user-attachments/assets/e85f9fbf-621f-42c3-9cd1-3a543f02a81a" />
+Continue building your app on:
 
-## Justification and References
+**[https://v0.app/chat/projects/DbrSuFCP7bD](https://v0.app/chat/projects/DbrSuFCP7bD)**
 
-1. PMBOK 7th Edition
+## How It Works
 
-- Provided performance domains.
-- Emphasized tailoring principles. 
-
-2. PRINCE2
-
-Contributed governance and process-based approach.
-Manage by iterations and continued business justification in innovative product development. 
-
-3. ISO 21500/21502
-
-Provided universal terminology and high-level process framework.
-Strengthened standardization of deliverables within scenarios.
-
-
-## Authors
-
-Built by [MAB / Malaika Fayyaz - Areeba Atif - Bareera Hanif Butt] for Project Management Course.
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
