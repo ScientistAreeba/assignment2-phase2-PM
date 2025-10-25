@@ -17,11 +17,11 @@ The processes are:
 
 The project is live at:
 
-**https://v0-website-access-jd.vercel.app/**
+**https://assignment2-phase2-pm-lud6-68mlbc238.vercel.app/**
 
 ## WBS
 
-<img width="1855" height="385" alt="wbs" src="https://github.com/user-attachments/assets/e85f9fbf-621f-42c3-9cd1-3a543f02a81a" />
+<img width="1855" height="385" alt="wbs" src="https://github.com/user-attachments/assets/0d1f15c8-7e11-429c-ae78-8e199cc7f4a4" />
 
 ## Justification and References
 
@@ -40,7 +40,6 @@ Manage by iterations and continued business justification in innovative product 
 Provided universal terminology and high-level process framework.
 Strengthened standardization of deliverables within scenarios.
 
->>>>>>> f035705eb0143dffe43c8c53bdc84cab93e05fd5
 
 ## Authors
 
