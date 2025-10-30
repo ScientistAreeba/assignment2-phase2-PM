@@ -17,7 +17,7 @@ The processes are:
 
 The project is live at:
 
-**https://assignment2-phase2-pm-lud6-68mlbc238.vercel.app/**
+**https://assignment2-phase2-pm-lud6.vercel.app/**
 
 ## WBS
 
